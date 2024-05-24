@@ -5,7 +5,21 @@
 - João Victor Castilho de Sá Freire - RA: 22.121.032-1
 - Pietra Marques Barbosa - RA: 22.121.124-6
 
+## Descrição
+
+Este projeto cria e manipula um banco de dados MySQL utilizando Python, incluindo a criação de tabelas, inserção de dados aleatórios e execução de queries SQL.
+
 ## Como Executar
+
+### 1. Clone o Repositório do GitHub
+### 2. Instale as dependências necessárias (pip install -r requirements.txt)
+### 3. Configure as váriaveis de ambiente:
+    DB_USER=root
+    DB_PASSWORD=sua_senha
+    DB_HOST=127.0.0.1
+    DB_NAME=feidb
+### 4. Execute o script Python para criar tabelas e inserir dados (python Projeto.py)
+### 5. Execute as queries disponibilizadas no arquivo queries_sql.txt em seu banco de dados.
 
 ## Diagrama Relacional
 
