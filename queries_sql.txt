@@ -1,0 +1,41 @@
+1- Histórico escolar de qualquer aluno
+
+SELECT h.ID, d.Nome AS Disciplina, h.Semestre, h.Ano, h.NotaFinal
+FROM HistoricoEscolar h
+JOIN Disciplina d ON h.ID_Disciplina = d.ID
+WHERE h.ID_Aluno = {ID_ALUNO};
+
+2- Histórico de disciplinas ministradas por qualquer professor
+
+SELECT dm.ID, d.Nome AS Disciplina, dm.Semestre, dm.Ano
+FROM DisciplinasMinistradas dm
+JOIN Disciplina d ON dm.ID_Disciplina = d.ID
+WHERE dm.ID_Professor = {ID_PROFESSOR};
+
+3- Listar alunos que já se formaram em um determinado semestre de um ano
+
+SELECT a.ID, a.Nome
+FROM Aluno a
+WHERE NOT EXISTS (
+    SELECT 1 
+    FROM MatrizCurricular mc
+    LEFT JOIN HistoricoEscolar h ON mc.ID_Disciplina = h.ID_Disciplina AND h.ID_Aluno = a.ID
+    WHERE h.NotaFinal < 5 OR h.NotaFinal IS NULL
+) AND a.ID IN (
+    SELECT ID_Aluno
+    FROM HistoricoEscolar
+    WHERE Semestre = {SEMESTRE} AND Ano = {ANO}
+);
+
+4- Listar todos os professores que são chefes de departamento, junto com o nome do departamento
+
+SELECT p.ID, p.Nome, d.Nome AS Departamento
+FROM Professor p
+JOIN Departamento d ON p.ID = d.Chefe_Departamento;
+
+5- Saber quais alunos formaram um grupo de TCC e qual professor foi o orientador
+
+SELECT t.ID, a.Nome AS Aluno, p.Nome AS Professor, t.Titulo, t.Semestre, t.Ano
+FROM TCC t
+JOIN Aluno a ON t.ID_Aluno = a.ID
+JOIN Professor p ON t.ID_Professor = p.ID;
